@@ -6,6 +6,7 @@
     <title>Portfolio - Ethan Ayache</title>
     <style>
         /* Reset & Base */
+        html { scroll-behavior: smooth; }
         :root {
             --bg: #0a0a0a;
             --surface: #161616;
@@ -13,6 +14,12 @@
             --secondary: #a855f7; /* Violet */
             --text: #f3f4f6;
             --text-muted: #9ca3af;
+        }
+        .light-mode {
+            --bg: #ffffff;
+            --surface: #f3f4f6;
+            --text: #111827;
+            --text-muted: #4b5563;
         }
         body {
             margin: 0;
@@ -55,8 +62,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .nav-links { display: flex; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
         .nav-links a:hover { color: var(--primary); }
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+        .theme-toggle:hover { transform: scale(1.2); color: var(--primary); }
 
         /* Hero Section */
         .hero {
@@ -139,6 +155,16 @@
             color: var(--text-muted);
             margin-top: 4rem;
         }
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: var(--primary);
+            margin-left: 5px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -149,13 +175,14 @@
                 <a href="#about">À propos</a>
                 <a href="#skills">Compétences</a>
                 <a href="#contact">Contact</a>
+                <button class="theme-toggle" id="theme-toggle" title="Changer de thème">☀️</button>
             </div>
         </nav>
     </header>
 
     <section class="hero">
         <h1>Ethan Ayache</h1>
-        <p class="subtitle">Développeur en devenir & Étudiant BTS SIO SLAM</p>
+        <p class="subtitle"><span id="typing-text"></span><span class="cursor"></span></p>
         <a href="#contact" class="btn">Me contacter</a>
     </section>
 
@@ -196,5 +223,38 @@
     <footer>
         <p>&copy; 2024 Ethan Ayache. Tous droits réservés.</p>
     </footer>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                toggleBtn.textContent = '🌙';
+            } else {
+                toggleBtn.textContent = '☀️';
+            }
+        });
+
+        const text = "Développeur en devenir & Étudiant BTS SIO SLAM";
+        const typingElement = document.getElementById('typing-text');
+        let index = 0;
+        let isDeleting = false;
+
+        function type() {
+            typingElement.textContent = text.substring(0, index);
+
+            if (!isDeleting && index < text.length) {
+                index++;
+                setTimeout(type, 100);
+            } else if (isDeleting && index > 0) {
+                index--;
+                setTimeout(type, 50);
+            } else {
+                isDeleting = !isDeleting;
+                setTimeout(type, isDeleting ? 2000 : 500);
+            }
+        }
+        type();
+    </script>
 </body>
 </html>
