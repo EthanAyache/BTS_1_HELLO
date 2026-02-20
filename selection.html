@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail d'accès</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* Effet de fond lumineux */
+        .bg-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulse 5s infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to right, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 4rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .card {
+            position: relative;
+            width: 280px;
+            height: 380px;
+            background: rgba(22, 22, 22, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        /* Effet de brillance au survol */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        .card:hover::before { transform: translateX(100%); }
+
+        .card-icon { font-size: 4rem; margin-bottom: 1.5rem; transition: 0.3s; }
+        .card:hover .card-icon { transform: scale(1.2); filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.6)); }
+
+        .card h2 { font-size: 1.5rem; margin: 0; font-weight: 700; }
+        .card p { color: #9ca3af; margin-top: 0.5rem; font-size: 0.9rem; }
+
+        /* Style spécifique pour la 2ème carte */
+        .card.secondary:hover {
+            border-color: #a855f7;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+        .card.secondary:hover .card-icon { filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6)); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <h1>Gateway Server</h1>
+
+    <div class="container">
+        <!-- Lien vers le site 1 (ex: Portfolio) -->
+        <a href="portfolio.html" class="card">
+            <div class="card-icon">👨‍💻</div>
+            <h2>Portfolio</h2>
+            <p>Accéder au site personnel</p>
+        </a>
+
+        <!-- Lien vers le site 2 (ex: Autre projet) -->
+        <a href="site2.html" class="card secondary">
+            <div class="card-icon">🚀</div>
+            <h2>Projet Web</h2>
+            <p>Accéder à la démonstration</p>
+        </a>
+    </div>
+
+</body>
+</html>
