@@ -1,3 +1,5 @@
 # HELLO WORD 
 ceci est mon premier repo github depuis le cmd
-## VOILA TOUT
+## je viens de commit un site 
+le site à été fait par ia 
+## On s'entraine à faire des push cmd
